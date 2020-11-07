@@ -3,6 +3,7 @@ from datetime import timedelta
 from urllib.request import urlopen
 # external
 from lxml import etree
+
 class  ConsultDiarioOficial():
     """
     This class consult indicator values from 
