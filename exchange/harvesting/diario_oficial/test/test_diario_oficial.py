@@ -1,12 +1,12 @@
 from datetime import datetime
-import unittest
+from django.test import TestCase
 # data types
 from http.client import HTTPResponse
 # diario
 from harvesting.diario_oficial.scraping import ConsultDiarioOficial
 
 
-class TestDiarioWebResults(unittest.TestCase):
+class TestDiarioWebResults(TestCase):
     def setUp(self):
         self.c_diario = ConsultDiarioOficial()
         date_format = "%d-%m-%Y"
