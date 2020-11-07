@@ -1,6 +1,9 @@
 from datetime import datetime
 from datetime import timedelta
 from urllib.request import urlopen
+from urllib.request import get
+# settings 
+from exchange.settings import fixer_APIAccessKey as django_fixer_access
 # external
 from lxml import etree
 
