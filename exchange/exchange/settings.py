@@ -124,3 +124,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 fixer_APIAccessKey = os.environ['fixer']
+banxico_APIToken  = os.environ['banxico']

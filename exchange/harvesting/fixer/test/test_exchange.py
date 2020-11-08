@@ -4,27 +4,27 @@ import json
 # django
 from django.test import TestCase
 # local
-from harvesting.fixer.exchange import FixerExchangeClient
+from harvesting.fixer.exchange import FixerExchange
 
 class ConsultFixerTest(TestCase):
     def setUp(self):
-        self.consultFixer_client = FixerExchangeClient()
+        self.consultFixer_client = FixerExchange()
 
-    def test_get_last_exchange_for(
+    def test_get_last_exchange(
         self
     ):
-        _ = self.consultFixer_client.get_last_exchange_for(
+        _ = self.consultFixer_client.get_last_exchange(
             coin_base='EUR',
             to_exchange=['MXN']
         )
         self.assertEqual(_['success'], True)
     
     def test_USD_access(self):
-        _ = self.consultFixer_client.get_last_exchange_for(
+        _ = self.consultFixer_client.get_last_exchange(
             coin_base='USD',
             to_exchange=['MXN']
         )
-        self.assertEqual(_['success'], True, "Is not accesing to USD")
+        self.assertEqual(_['success'], True, "Fixer is not accesing to USD")
         if  _['success'] == False:
             usd_restricted_msg = "'base_currency_access_restricted'"
             self.assertEqual(

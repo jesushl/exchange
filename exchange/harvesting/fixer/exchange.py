@@ -4,7 +4,7 @@ from urllib3 import PoolManager
 from exchange.settings import fixer_APIAccessKey as django_fixer_access
 
 
-class FixerExchangeClient():
+class FixerExchange():
     def __init__(
         self,
         fixer_APIAccessKey:str=None
@@ -17,7 +17,7 @@ class FixerExchangeClient():
         self.date_format = "%Y-%m-%d"
         self.decode = 'utf-8'
 
-    def get_last_exchange_for(
+    def get_last_exchange(
         self,
         coin_base:str="USD",
         to_exchange:list=['MXN']
@@ -38,7 +38,9 @@ class FixerExchangeClient():
         coin_base:str="USD",
         to_exchange:list=['MXN']
     )->str:
-        url = "{base_url}?access_key={api_key}&base={coin_base}&symbols={to_exchange}"
+        url = ("{base_url}?access_key={api_key}&"
+            "base={coin_base}&symbols={to_exchange}"
+        )
         to_exchange_formated = ','.join(to_exchange)
         _ = url.format(
             base_url=self.base_url,
