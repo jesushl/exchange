@@ -1,5 +1,6 @@
 from datetime import datetime
 from datetime import timedelta
+import pytz
 from urllib.request import urlopen
 
 # external
@@ -10,6 +11,7 @@ class  ConsultDiarioOficial():
     This class consult indicator values from 
     https://www.dof.gob.mx/
     This method use lxml to extract html result
+    this value is update once at day
     """
     def __init__(
         self,
@@ -22,8 +24,9 @@ class  ConsultDiarioOficial():
             "&hfecha={to_day}%2F{to_month}%2F{to_year}"
             )
         self.xpath_search_pathern = '//tr[contains(@class, "Celda 1")]//td//text()'
-        
-    def get_last_price_for_idicator(
+        self.MXT = pytz.timezone('America/Mexico_City')
+
+    def get_last_exchange(
         self,
         indicator_id:int
     ):
@@ -32,7 +35,7 @@ class  ConsultDiarioOficial():
         indicators limits was calculated from test_diario_oficial 
         to see how many indicators responds with a 200 value
         """
-        now_date = datetime.now()
+        now_date = datetime.now(self.MXT)
         yesterday_date = now_date - timedelta(days=1)
         return self.get_indicator_values(
             indicator=indicator_id,

@@ -37,7 +37,12 @@ class TestDiarioWebResults(TestCase):
                 "Indicator {} response in different format".format(indicator_id)
             )
     
-
+    def test_get_usd_indicator_value(self):
+        _value = self.c_diario.get_indicator_values(
+            indicator=self.dollar_indicator_id,
+            from_date=self.yesterday_date,
+            to_date=self.now_date
+        )
 
     def test_url_builder(self):
         expected_string = (
