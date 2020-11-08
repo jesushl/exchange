@@ -1,6 +1,7 @@
 # python
 from urllib3 import PoolManager
 import json
+from datetime import datetime
 # django
 from django.test import TestCase
 # local
@@ -10,6 +11,11 @@ class ConsultFixerTest(TestCase):
     def setUp(self):
         self.consultFixer_client = FixerExchange()
 
+    def test_get_last_exchange_USD_MXN(self):
+        _ = self.consultFixer_client.get_last_exchange_USD_MXN()
+        self.assertIsInstance(_['date'], datetime)
+        self.assertIsInstance(_['price'] , float)
+        
     def test_get_last_exchange(
         self
     ):

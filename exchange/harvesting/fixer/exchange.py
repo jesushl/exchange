@@ -1,5 +1,6 @@
 import json
 from urllib3 import PoolManager
+from datetime import datetime
 # settings 
 from exchange.settings import fixer_APIAccessKey as django_fixer_access
 
@@ -17,6 +18,24 @@ class FixerExchange():
         self.date_format = "%Y-%m-%d"
         self.decode = 'utf-8'
 
+    def get_last_exchange_USD_MXN(
+        self
+    ):
+        response_dict = self.get_last_exchange(
+            coin_base="USD",
+            to_exchange=['MXN']
+        )
+        # formating according other requests 
+        date = datetime.strptime(
+            response_dict['date'], # date string
+            self.date_format
+        )
+        price = float(response_dict['rates']['MXN'])
+        return {
+            'date': date,
+            'price': price
+        }
+
     def get_last_exchange(
         self,
         coin_base:str="USD",
@@ -29,7 +48,8 @@ class FixerExchange():
         http  =     PoolManager()
         response = http.request('GET', url)
         if response.status == 200:
-            return json.loads(response.data.decode(self.decode))
+            response_dict  = json.loads(response.data.decode(self.decode))
+            return response_dict
         else:
             raise ConnectionError 
             
