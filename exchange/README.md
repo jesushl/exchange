@@ -15,12 +15,16 @@ RUN     apt-get install -y git  \
             && apt-get install -y python \
             && apt-get install -y python3-pip
 RUN  exec git clone https://github.com/jesushl/exchange.git  
-WORKDIR /exchange/
+WORKDIR /exchange/exchange/
 RUN pip3  install -r requirements.txt 
 EXPOSE 80
 RUN python3 manage.py migrate
 CMD ["python3", "manage.py", "runserver", "0.0.0.0:80"]
 ```
 
-# Settings
-E
+# Settings 
+This project requires two operation tokens ,
+one for fixer and othrer eith enoght privileges 
+to consult USD in fixer. 
+This aplication consumes both from system environment 
+as 'fixer' and 'banxico'
