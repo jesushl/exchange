@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     # external
     "bootstrap4",
     # aplications
-    "harvesting"
+    "harvesting",
+    "rest_framework",
 ]
 
 MIDDLEWARE = [
@@ -125,3 +126,11 @@ STATIC_URL = '/static/'
 
 fixer_APIAccessKey = os.environ['fixer']
 banxico_APIToken  = os.environ['banxico']
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
