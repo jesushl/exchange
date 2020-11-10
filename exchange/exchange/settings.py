@@ -38,10 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # external
-    "bootstrap4",
+    "rest_framework",
     # aplications
     "harvesting",
-    "rest_framework",
 ]
 
 MIDDLEWARE = [
